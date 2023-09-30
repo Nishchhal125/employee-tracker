@@ -17,6 +17,10 @@ const getEmployee = async (req,res) => {
     try {
         const {id} = req.params
         const employee = await Employee.findById(id)
+        //if employee not found in db
+        if(!employee) {
+            return res.status(404).send({message: "Employee not found"})
+        }
         res.status(200).send(employee)
     } catch(error) {
         console.log(error)
